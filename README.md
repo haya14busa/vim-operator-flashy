@@ -11,7 +11,7 @@
 
 Flush yanked area :flashlight:
 
-TODO: gif
+![flashy.gif (978×255)](https://raw.githubusercontent.com/haya14busa/i/c81f605c94516d5c8dae0914c46e378e0ba9d865/vim-operator-flashy/flashy.gif)
 
 You can confirm that text is yanked correctly and see yanked text by highlighting.
 
