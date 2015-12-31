@@ -53,7 +53,7 @@ endfunction
 " Example:
 "   onoremap <expr> y operator#flashy#o_y()
 function! operator#flashy#o_y() abort
-  let save_cursor = getcurpos()
+  let save_cursor = getpos('.')
   let rest_cursor = ":call setpos('.'," .  string(save_cursor) . ")\<CR>"
   return "\<Esc>\"" . operator#user#register() . v:count . 'g@g@' . rest_cursor
 endfunction
