@@ -15,6 +15,33 @@ Flash yanked area :flashlight:
 
 You can confirm that text is yanked correctly and see yanked text by highlighting.
 
+:heavy_check_mark: Dependency :heavy_check_mark:
+------------------------------------------------
+
+This plugin depends on [kana/vim-operator-user](https://github.com/kana/vim-operator-user). Please install it in advance.
+
+:package: Installation :package:
+--------------------------------
+
+Install with your favorite plugin managers like [Neobundle](https://github.com/Shougo/neobundle.vim) / [Vundle](https://github.com/gmarik/Vundle.vim) / [vim-plug](https://github.com/junegunn/vim-plug)
+
+```vim
+NeoBundle 'kana/vim-operator-user'
+NeoBundle 'haya14busa/vim-operator-flashy.vim'
+
+Plugin 'kana/vim-operator-user'
+Plugin 'haya14busa/vim-operator-flashy.vim'
+
+Plug 'kana/vim-operator-user'
+Plug 'haya14busa/vim-operator-flashy.vim'
+```
+
+[pathogen](https://github.com/tpope/vim-pathogen)
+
+```
+git clone https://github.com/kana/vim-operator-user ~/.vim/bundle/vim-operator-user
+git clone https://github.com/haya14busa/vim-operator-flashy ~/.vim/bundle/vim-operator-flashy
+```
 
 :tada: Usage :tada:
 -------------------
