@@ -27,13 +27,13 @@ Install with your favorite plugin managers like [Neobundle](https://github.com/S
 
 ```vim
 NeoBundle 'kana/vim-operator-user'
-NeoBundle 'haya14busa/vim-operator-flashy.vim'
+NeoBundle 'haya14busa/vim-operator-flashy'
 
 Plugin 'kana/vim-operator-user'
-Plugin 'haya14busa/vim-operator-flashy.vim'
+Plugin 'haya14busa/vim-operator-flashy'
 
 Plug 'kana/vim-operator-user'
-Plug 'haya14busa/vim-operator-flashy.vim'
+Plug 'haya14busa/vim-operator-flashy'
 ```
 
 [pathogen](https://github.com/tpope/vim-pathogen)

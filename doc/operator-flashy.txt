@@ -57,9 +57,9 @@ INSTALLATION				*operator-flashy-installation*
 
 Install with your favorite plugin managers like NeoBundle/Plugin/Plug
 >
-	NeoBundle 'haya14busa/vim-operator-flashy.vim'
-	Plugin 'haya14busa/vim-operator-flashy.vim'
-	Plug 'haya14busa/vim-operator-flashy.vim'
+	NeoBundle 'haya14busa/vim-operator-flashy'
+	Plugin 'haya14busa/vim-operator-flashy'
+	Plug 'haya14busa/vim-operator-flashy'
 
 ==============================================================================
 INTERFACE				*operator-flashy-interface*
