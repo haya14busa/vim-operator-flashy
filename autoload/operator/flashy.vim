@@ -40,7 +40,7 @@ function! operator#flashy#do(wise) abort
 
   let visual_command = operator#user#visual_command_from_wise_name(a:wise)
   let pattern = s:Search.pattern_by_range(visual_command, getpos("'[")[1:], getpos("']")[1:])
-  call s:flash(pattern)
+  call s:flash(pattern, g:operator#flashy#flash_time)
   call s:yank(visual_command)
 
   " Restore cursor position for linewise motion like 'yj'.
@@ -53,20 +53,26 @@ endfunction
 " Example:
 "   onoremap <expr> y operator#flashy#o_y()
 function! operator#flashy#o_y() abort
-  let save_cursor = getpos('.')
-  let rest_cursor = ":call setpos('.'," .  string(save_cursor) . ")\<CR>"
-  return "\<Esc>\"" . operator#user#register() . v:count . 'g@g@' . rest_cursor
+  let cursor = getpos('.')
+  return printf("g@:call operator#flashy#_o_y(%s)\<CR>", string(cursor))
 endfunction
 
-function! s:flash(pattern) abort
+function! operator#flashy#_o_y(cursor_pos) abort
+  call setpos('.', a:cursor_pos)
+  call s:flash(printf('\%%%dl', line('.')), g:operator#flashy#flash_time)
+endfunction
+
+function! s:flash(pattern, time) abort
   call s:Highlight.highlight('YankRegion', g:operator#flashy#group, a:pattern, 10)
   redraw
-  call s:sleep(g:operator#flashy#flash_time)
+  call s:sleep(a:time)
   call s:clear()
 endfunction
 
 function! s:sleep(ms) abort
-  execute 'sleep' g:operator#flashy#flash_time . 'ms'
+  let t = reltime()
+  while !getchar(1) && a:ms - str2float(reltimestr(reltime(t))) * 1000.0 > 0
+  endwhile
 endfunction
 
 function! s:clear() abort
