@@ -56,7 +56,8 @@ endfunction
 "   onoremap <expr> y operator#flashy#o_y()
 function! operator#flashy#o_y() abort
   let cursor = getpos('.')
-  return printf("g@:call operator#flashy#_o_y(%s)\<CR>", string(cursor))
+  let yank = "\<Esc>\"" . operator#user#register() . v:count1 . 'yy'
+  return printf("%s:call operator#flashy#_o_y(%s)\<CR>", yank, string(cursor))
 endfunction
 
 function! operator#flashy#_o_y(cursor_pos) abort
