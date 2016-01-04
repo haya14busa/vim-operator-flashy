@@ -63,10 +63,14 @@ function! operator#flashy#_o_y(cursor_pos) abort
 endfunction
 
 function! s:flash(pattern, time) abort
-  call s:Highlight.highlight('YankRegion', g:operator#flashy#group, a:pattern, 10)
-  redraw
-  call s:sleep(a:time)
-  call s:clear()
+  try
+    call s:Highlight.highlight('Cursor', 'Cursor', '\%#', 11)
+    call s:Highlight.highlight('YankRegion', g:operator#flashy#group, a:pattern, 10)
+    redraw
+    call s:sleep(a:time)
+  finally
+    call s:clear()
+  endtry
 endfunction
 
 function! s:sleep(ms) abort
@@ -76,6 +80,7 @@ function! s:sleep(ms) abort
 endfunction
 
 function! s:clear() abort
+  call s:Highlight.clear('Cursor')
   call s:Highlight.clear('YankRegion')
 endfunction
 
