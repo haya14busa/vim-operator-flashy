@@ -40,8 +40,10 @@ function! operator#flashy#do(wise) abort
 
   let visual_command = operator#user#visual_command_from_wise_name(a:wise)
   let pattern = s:Search.pattern_by_range(visual_command, getpos("'[")[1:], getpos("']")[1:])
-  call s:yank(visual_command)
+  " Call s:flash() first because s:yank() moves cursor position.
+  " e.g. L10yy
   call s:flash(pattern, g:operator#flashy#flash_time)
+  call s:yank(visual_command)
 
   " Restore cursor position for linewise motion like 'yj'.
   if a:wise is# 'line'
