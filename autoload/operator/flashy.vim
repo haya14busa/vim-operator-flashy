@@ -40,10 +40,10 @@ function! operator#flashy#do(wise) abort
 
   let visual_command = operator#user#visual_command_from_wise_name(a:wise)
   let pattern = s:Search.pattern_by_range(visual_command, getpos("'[")[1:], getpos("']")[1:])
-  " Call s:flash() first because s:yank() moves cursor position.
-  " e.g. L10yy
-  call s:flash(pattern, g:operator#flashy#flash_time)
+  " Call s:yank() first to show information while flashing.
+  " e.g. 14lines yanked
   call s:yank(visual_command)
+  call s:flash(pattern, g:operator#flashy#flash_time)
 
   " Restore cursor position for linewise motion like 'yj'.
   if a:wise is# 'line'
@@ -91,7 +91,7 @@ function! s:yank(visual_command) abort
   let original_selection = &g:selection
   let &g:selection = 'inclusive'
   let reg = operator#user#register()
-  execute 'normal!' '`[' . a:visual_command . '`]"' . reg . 'y'
+  execute 'normal!' '`["' . reg . 'y' . a:visual_command . '`]"'
   let &g:selection = original_selection
 endfunction
 
