@@ -68,8 +68,8 @@ endfunction
 
 function! s:flash(pattern, time) abort
   try
-    call s:Highlight.highlight('Cursor', 'Cursor', '\%#', 11)
-    call s:Highlight.highlight('YankRegion', g:operator#flashy#group, a:pattern, 10)
+    call s:highlight_cursor()
+    call s:highlight_yanked_region(a:pattern)
     redraw
     call s:sleep(a:time)
   finally
@@ -81,6 +81,23 @@ function! s:sleep(ms) abort
   let t = reltime()
   while !getchar(1) && a:ms - str2float(reltimestr(reltime(t))) * 1000.0 > 0
   endwhile
+endfunction
+
+function! s:highlight_cursor() abort
+  " Do not highlight cursor if the character under cursor is Tab character
+  " because it has more than one width and the cursor highlight will be
+  " ugly.
+  if s:get_cursor_char() isnot# "\t"
+    call s:Highlight.highlight('Cursor', 'Cursor', '\%#', 11)
+  endif
+endfunction
+
+function! s:get_cursor_char() abort
+  return getline('.')[col('.')-1]
+endfunction
+
+function! s:highlight_yanked_region(pattern) abort
+  call s:Highlight.highlight('YankRegion', g:operator#flashy#group, a:pattern, 10)
 endfunction
 
 function! s:clear() abort
