@@ -26,7 +26,7 @@ augroup plugin-flashy-highlight
 augroup END
 
 " operator#flashy#do() yanks text with flash in normal mode.
-" It doesn't provie mapping for visual mode and doesn't support 'block' wise.
+" It assumes not to provide mappings for visual mode.
 " @param {'char'|'line'|'block'} wise
 function! operator#flashy#do(wise) abort
   if s:is_empty_region()
@@ -106,11 +106,8 @@ function! s:clear() abort
 endfunction
 
 function! s:yank(visual_command) abort
-  let original_selection = &g:selection
-  let &g:selection = 'inclusive'
   let reg = operator#user#register()
   execute 'normal!' '`["' . reg . 'y' . a:visual_command . '`]"'
-  let &g:selection = original_selection
 endfunction
 
 " :h cpo-E
