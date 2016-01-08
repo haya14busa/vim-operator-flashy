@@ -63,7 +63,16 @@ endfunction
 function! operator#flashy#_o_y(cursor_pos) abort
   call setpos('.', a:cursor_pos)
   let pattern = printf('\%%%dl\_.*\%%%dl', line("'["), line("']"))
-  call s:flash(pattern, g:operator#flashy#flash_time)
+  " Turn off cursorline temporalily because redraw of highlight line with
+  " cursorline is too slow in large file.
+  " ref: https://github.com/haya14busa/vim-operator-flashy/issues/5
+  let cursorline_save = &cursorline
+  let &cursorline = 0
+  try
+    call s:flash(pattern, g:operator#flashy#flash_time)
+  finally
+    let &cursorline = cursorline_save
+  endtry
 endfunction
 
 function! s:flash(pattern, time) abort
