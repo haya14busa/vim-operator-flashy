@@ -15,7 +15,7 @@ let g:operator#flashy#group = get(g:, 'operator#flashy#group', 'Flashy')
 let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 100)
 
 function! s:init_hl() abort
-  highlight Flashy term=bold ctermbg=0 guibg=#13354A
+  highlight default Flashy term=bold ctermbg=0 guibg=#13354A
 endfunction
 
 call s:init_hl()
