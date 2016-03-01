@@ -16,6 +16,11 @@ let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 100)
 
 function! s:init_hl() abort
   highlight default Flashy term=bold ctermbg=0 guibg=#13354A
+  if hlexists('Cursor')
+    highlight default link FlashyCursor Cursor
+  else
+    highlight default FlashyCursor term=reverse cterm=reverse gui=reverse
+  endif
 endfunction
 
 call s:init_hl()
@@ -97,7 +102,7 @@ function! s:highlight_cursor() abort
   " because it has more than one width and the cursor highlight will be
   " ugly.
   if s:get_cursor_char() isnot# "\t"
-    call s:Highlight.highlight('Cursor', 'Cursor', '\%#', 11)
+    call s:Highlight.highlight('FlashyCursor', 'FlashyCursor', '\%#', 11)
   endif
 endfunction
 
@@ -110,7 +115,7 @@ function! s:highlight_yanked_region(pattern) abort
 endfunction
 
 function! s:clear() abort
-  call s:Highlight.clear('Cursor')
+  call s:Highlight.clear('FlashyCursor')
   call s:Highlight.clear('YankRegion')
 endfunction
 
