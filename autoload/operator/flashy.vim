@@ -44,7 +44,9 @@ function! operator#flashy#do(wise) abort
   endif
 
   let visual_command = operator#user#visual_command_from_wise_name(a:wise)
-  let pattern = s:Search.pattern_by_range(visual_command, getpos("'[")[1:], getpos("']")[1:])
+  let start = [line("'["), virtcol("'[")]
+  let end = [line("']"), virtcol("']")]
+  let pattern = s:Search.pattern_by_range(visual_command, start, end)
   " Call s:yank() first to show information while flashing.
   " e.g. 14lines yanked
   call s:yank(visual_command)
